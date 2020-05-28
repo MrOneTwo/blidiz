@@ -13,6 +13,8 @@ PORT =65432
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.settimeout(20)
 
+artifacts = []
+connection_established = False
 
 class ArtifactState(Enum):
     NEW = 1
@@ -23,8 +25,6 @@ class Artifact():
     def __init__(self, name: str, state: ArtifactState = ArtifactState.NEW):
         self.name = name
         self.state = state
-
-artifacts = []
 
 def f_created(event):
     print(f"Created... {event.src_path}")
@@ -49,9 +49,10 @@ def f_modified(event):
             pass
         else:
             artifacts.append(Artifact(f_name, ArtifactState.MODIFIED))
-            sock.send(bytes(event.src_path, 'ascii'))
-            data = sock.recv(4)
-            print(data)
+            if connection_established:
+                sock.send(bytes(event.src_path, 'ascii'))
+                data = sock.recv(4)
+                print(data)
 
 def f_moved(event):
     print(f"Moved... {event.src_path}")
@@ -59,7 +60,7 @@ def f_moved(event):
 
 if __name__ == "__main__":
     observer = Observer()
-    event_handler = PatternMatchingEventHandler(ignore_directories=True, case_sensitive=True)
+    event_handler = PatternMatchingEventHandler(patterns=("*.obj", "*.OBJ"), ignore_directories=True, case_sensitive=True)
     observer.schedule(event_handler, str(EXPORT_PATH), recursive=False)
     observer.start()
 
@@ -70,8 +71,11 @@ if __name__ == "__main__":
 
     try:
         sock.connect((HOST, PORT))
+        connection_established = True
     except socket.timeout:
         print("Trying to connect to server timed out...")
+    except ConnectionRefusedError:
+        print("Connection refused...")
 
     try:
         while True:

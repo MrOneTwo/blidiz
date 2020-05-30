@@ -4,8 +4,11 @@ from pynput.mouse import Button
 import pynput
 import time
 from pathlib import Path
+import config
 
-# 36 - 51
+
+ATOM_NAME = "ATOM"
+EXPORT_PATH = Path(config.CFG_EXPORT_PATH)
 
 keyboard = pynput.keyboard.Controller()
 mouse = pynput.mouse.Controller()
@@ -31,12 +34,6 @@ BUTTON_TO_BUTTON_ID = {
     "D3_1": 50, "D3_2": 66,
     "D4_1": 51, "D4_2": 67
 }
-
-cmd = "echo test"
-
-ATOM_NAME = "ATOM"
-EXPORT_PATH = Path(r"C:\Users\mc\Desktop\crouching_girl")
-DRY_RUN = True
 
 midiin = rtmidi.RtMidiIn()
 

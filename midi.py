@@ -72,6 +72,12 @@ def exportMeshZbrush(filename: str):
         keyboard.press("y")
         keyboard.release("y")
 
+def setBrushZbrush(keys: list):
+    for k in keys:
+        keyboard.press(k)
+        keyboard.release(k)
+        time.sleep(0.02)
+
 
 while True:
     m = midiin.getMessage(250)
@@ -111,6 +117,7 @@ while True:
                 exportMeshZbrush("export_15")
             if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["D4_2"]:
                 exportMeshZbrush("export_16")
+            # Layer 1.
             if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B1_1"]:
                 keyboard.press("s")
                 keyboard.release("s")
@@ -120,20 +127,12 @@ while True:
                 mouse.move(2, 0)
                 time.sleep(0.05)
                 mouse.release(Button.left)
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B3_1"]:
-                keyboard.press("b")
-                keyboard.release("b")
-                time.sleep(0.02)
-                keyboard.press("c")
-                keyboard.release("c")
-                time.sleep(0.02)
-                keyboard.press("b")
-                keyboard.release("b")
-                time.sleep(0.02)
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B2_1"]:
-                pass
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B4_1"]:
-                pass
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A1_1"]:
+                setBrushZbrush(("b", "c", "b"))
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A2_1"]:
+                setBrushZbrush(("b", "s", "m"))
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A3_1"]:
+                setBrushZbrush(("b", "d"))
         elif m.isNoteOff():
             print("OFF", m.getNoteNumber(), m.getMidiNoteName(m.getNoteNumber()))
         elif m.isController():

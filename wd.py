@@ -6,11 +6,8 @@ from pathlib import Path
 from enum import Enum
 import socket
 
-if len(sys.argv)< 2:
-    print("Please call this script with a path to watch as the first argument.")
-    quit()
 
-EXPORT_PATH = Path(sys.argv[1])
+EXPORT_PATH = Path(config.CFG_EXPORT_PATH)
 HOST = 'localhost'
 PORT = 65432
 

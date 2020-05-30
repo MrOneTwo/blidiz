@@ -14,28 +14,29 @@ knob_position = 0
 knob_previous = knob_position
 
 BUTTON_TO_BUTTON_ID = {
-    "A1": 36,
-    "A2": 37,
-    "A3": 38,
-    "A4": 39,
-    "B1": 40,
-    "B2": 41,
-    "B3": 42,
-    "B4": 43,
-    "C1": 44,
-    "C2": 45,
-    "C3": 46,
-    "C4": 47,
-    "D1": 48,
-    "D2": 49,
-    "D3": 50,
-    "D4": 51,
+    "A1_1": 36, "A1_2": 52,
+    "A2_1": 37, "A2_2": 53,
+    "A3_1": 38, "A3_2": 54,
+    "A4_1": 39, "A4_2": 55,
+    "B1_1": 40, "B1_2": 56,
+    "B2_1": 41, "B2_2": 57,
+    "B3_1": 42, "B3_2": 58,
+    "B4_1": 43, "B4_2": 59,
+    "C1_1": 44, "C1_2": 60,
+    "C2_1": 45, "C2_2": 61,
+    "C3_1": 46, "C3_2": 62,
+    "C4_1": 47, "C4_2": 63,
+    "D1_1": 48, "D1_2": 64,
+    "D2_1": 49, "D2_2": 65,
+    "D3_1": 50, "D3_2": 66,
+    "D4_1": 51, "D4_2": 67
 }
 
 cmd = "echo test"
 
 ATOM_NAME = "ATOM"
 EXPORT_PATH = Path(r"C:\Users\mc\Desktop\crouching_girl")
+DRY_RUN = True
 
 midiin = rtmidi.RtMidiIn()
 
@@ -79,16 +80,41 @@ while True:
     m = midiin.getMessage(250)
     if m:
         if m.isNoteOn():
-            # print('On', m.getMidiNoteName(m.getNoteNumber()), m.getVelocity())
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A1"]:
+            print("ON", m.getNoteNumber(), m.getMidiNoteName(m.getNoteNumber()), m.getVelocity())
+            # Layer 2.
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A1_2"]:
                 exportMeshZbrush("export_1")
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A2"]:
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A2_2"]:
                 exportMeshZbrush("export_2")
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A3"]:
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A3_2"]:
                 exportMeshZbrush("export_3")
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A4"]:
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["A4_2"]:
                 exportMeshZbrush("export_4")
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B1"]:
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B1_2"]:
+                exportMeshZbrush("export_5")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B2_2"]:
+                exportMeshZbrush("export_6")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B3_2"]:
+                exportMeshZbrush("export_7")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B4_2"]:
+                exportMeshZbrush("export_8")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["C1_2"]:
+                exportMeshZbrush("export_9")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["C2_2"]:
+                exportMeshZbrush("export_10")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["C3_2"]:
+                exportMeshZbrush("export_11")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["C4_2"]:
+                exportMeshZbrush("export_12")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["D1_2"]:
+                exportMeshZbrush("export_13")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["D2_2"]:
+                exportMeshZbrush("export_14")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["D3_2"]:
+                exportMeshZbrush("export_15")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["D4_2"]:
+                exportMeshZbrush("export_16")
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B1_1"]:
                 keyboard.press("s")
                 keyboard.release("s")
                 time.sleep(0.02)
@@ -97,7 +123,7 @@ while True:
                 mouse.move(2, 0)
                 time.sleep(0.05)
                 mouse.release(Button.left)
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B3"]:
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B3_1"]:
                 keyboard.press("b")
                 keyboard.release("b")
                 time.sleep(0.02)
@@ -107,12 +133,12 @@ while True:
                 keyboard.press("b")
                 keyboard.release("b")
                 time.sleep(0.02)
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B2"]:
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B2_1"]:
                 pass
-            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B4"]:
+            if m.getNoteNumber() == BUTTON_TO_BUTTON_ID["B4_1"]:
                 pass
         elif m.isNoteOff():
-            print("OFF", m.getMidiNoteName(m.getNoteNumber()))
+            print("OFF", m.getNoteNumber(), m.getMidiNoteName(m.getNoteNumber()))
         elif m.isController():
             print("CONTROLLER", m.getControllerNumber(), m.getControllerValue())
             if m.getNoteNumber() == 14:

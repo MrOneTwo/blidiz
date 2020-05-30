@@ -6,9 +6,13 @@ from pathlib import Path
 from enum import Enum
 import socket
 
-EXPORT_PATH = Path(r"C:\Users\mc\Desktop\crouching_girl")
+if len(sys.argv)< 2:
+    print("Please call this script with a path to watch as the first argument.")
+    quit()
+
+EXPORT_PATH = Path(sys.argv[1])
 HOST = 'localhost'
-PORT =65432
+PORT = 65432
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.settimeout(20)
@@ -19,7 +23,6 @@ connection_established = False
 class ArtifactState(Enum):
     NEW = 1
     MODIFIED = 2
-    DELETED = 3
 
 class Artifact():
     def __init__(self, name: str, state: ArtifactState = ArtifactState.NEW):

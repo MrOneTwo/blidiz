@@ -5,6 +5,7 @@ from watchdog.events import PatternMatchingEventHandler
 from pathlib import Path
 from enum import Enum
 import socket
+import config
 
 
 EXPORT_PATH = Path(config.CFG_EXPORT_PATH)

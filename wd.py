@@ -61,7 +61,7 @@ def f_moved(event):
 
 if __name__ == "__main__":
     observer = Observer()
-    observed_files = ("*.obj", "*.OBJ")
+    observed_files = ["*.obj", "*.OBJ"]
     event_handler = PatternMatchingEventHandler(patterns=observed_files, ignore_directories=True, case_sensitive=True)
     observer.schedule(event_handler, str(EXPORT_PATH), recursive=False)
     observer.start()
